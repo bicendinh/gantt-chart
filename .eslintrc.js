@@ -10,12 +10,19 @@ module.exports = {
         sourceType: 'module',
         project: './tsconfig.json'
     },
+    multiline: {
+        delimiter: 'semi',
+        requireLast: true
+    },
+    singleline: {
+        delimiter: 'semi',
+        requireLast: true
+    },
     plugins: ['react'],
     rules: {
-        semi: 'off',
         '@typescript-eslint/semi': 'off',
         indent: 'off',
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/indent': 'off'
     }
-}
+};

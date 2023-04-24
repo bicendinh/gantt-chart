@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './App.css';
-import Button from './components/Button';
-import { type DefaultTheme } from './types/public';
+import 'App.css';
+import Button from 'components/Button';
+import { type DefaultTheme } from './types';
 
 const App: React.FunctionComponent = () => {
     const [themeMode, setThemeMode] = useState<DefaultTheme>('default-theme');
