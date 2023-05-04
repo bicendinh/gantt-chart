@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
 export type DefaultTheme = 'default-theme' | 'dark-theme';
 
 export enum ViewMode {
@@ -12,13 +13,12 @@ export enum ViewMode {
 }
 
 export type TaskType = 'task' | 'milestone' | 'project';
-
 export interface Task {
     id: string;
     type: TaskType;
     name: string;
-    start: Date;
-    end: Date;
+    startTime: string;
+    duration: number; // milisecond
     progress: number;
     styles?: {
         backgroundColor?: string;
@@ -31,6 +31,14 @@ export interface Task {
     dependencies?: string[];
     hideChildren?: boolean;
     displayOrder?: number;
+    subtasks?: Task[];
+}
+
+export type ColumnType = 'id' | 'name' | 'startdate' | 'duration';
+export interface Column {
+    type: ColumnType;
+    title: string;
+    width?: number;
 }
 
 export interface EventOption {
