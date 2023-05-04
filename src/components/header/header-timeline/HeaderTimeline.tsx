@@ -8,7 +8,6 @@ const HeaderTimelineContainer = styled.div`
     font-weight: 400;
     font-size: 1em;
     color-scheme: light;
-    background-color: red;
 `;
 
 const HeaderTimeline: React.FC = () => <HeaderTimelineContainer />;

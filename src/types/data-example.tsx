@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 const child1_task1: Task = {
     id: uuidv4(),
     type: 'task',
-    name: 'Task 1',
+    name: 'Child 1 - Task 1',
     startTime: '2017-01-02',
     duration: 100000,
     progress: 0.9,
@@ -16,7 +16,7 @@ const child1_task1: Task = {
 const child2_task1: Task = {
     id: uuidv4(),
     type: 'task',
-    name: 'Task 1',
+    name: 'Child 2 - Task 1',
     startTime: '2017-01-02',
     duration: 103000,
     progress: 0.9,
@@ -39,7 +39,7 @@ const task1: Task = {
 const child2_task2: Task = {
     id: uuidv4(),
     type: 'task',
-    name: 'Task 2',
+    name: 'Child 2 - Task 2',
     startTime: '2017-01-02',
     duration: 104000,
     progress: 0.4,

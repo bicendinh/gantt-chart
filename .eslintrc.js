@@ -19,6 +19,7 @@ module.exports = {
         '@typescript-eslint/semi': 'off',
         indent: 'off',
         '@typescript-eslint/no-floating-promises': 'off',
-        '@typescript-eslint/indent': 'off'
+        '@typescript-eslint/indent': 'off',
+        '@typescript-eslint/member-delimiter-style': 'off'
     }
 };

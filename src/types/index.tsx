@@ -32,6 +32,8 @@ export interface Task {
     hideChildren?: boolean;
     displayOrder?: number;
     subtasks?: Task[];
+    level?: number;
+    ganttId?: string;
 }
 
 export type ColumnType = 'id' | 'name' | 'startdate' | 'duration';

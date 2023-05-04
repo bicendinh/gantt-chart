@@ -1,13 +1,17 @@
+import GanttTable from 'components/gantt-table/GanttTable';
+import GanttTimeline from 'components/gantt-timeline/GanttTimeline';
 import Header from 'components/header/Header';
 import styled from 'styled-components';
+import GanttSplitter from './GanttSplitter';
 
 const GanttContainer = styled.div`
     position: relative;
     flex: 1;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background-color: red;
+    background-color: var(--primary-background-color);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 
@@ -16,13 +20,12 @@ const GanttContent = styled.div`
     flex: 1 1 0;
     contain: strict;
     position: relative;
-    background-color: green;
     overflow-anchor: none;
     overflow: hidden;
-    color: #4f5964;
+    color: var(--secondary-text-color);
 `;
 
-const GanttTimelineTemp = styled.div`
+const GanttInner = styled.div`
     height: 1886px;
     min-height: 100%;
     position: absolute;
@@ -31,7 +34,6 @@ const GanttTimelineTemp = styled.div`
     overflow: hidden;
     width: 100%;
     align-items: stretch;
-    background-color: blue;
     box-sizing: border-box;
 `;
 
@@ -40,7 +42,11 @@ const Gantt: React.FC = () => {
         <GanttContainer>
             <Header />
             <GanttContent>
-                <GanttTimelineTemp />
+                <GanttInner>
+                    <GanttTable />
+                    <GanttSplitter />
+                    <GanttTimeline />
+                </GanttInner>
             </GanttContent>
         </GanttContainer>
     );
