@@ -1,25 +1,9 @@
-import React, { useState } from 'react';
+import type React from 'react';
 import 'App.css';
-import Button from 'components/Button';
-import { type DefaultTheme } from './types';
+import Gantt from 'components/gantt/Gantt';
 
 const App: React.FunctionComponent = () => {
-    const [themeMode, setThemeMode] = useState<DefaultTheme>('default-theme');
-    return (
-        <div className={`App ${themeMode}`}>
-            <Button
-                onClick={() => {
-                    setThemeMode(
-                        themeMode === 'dark-theme'
-                            ? 'default-theme'
-                            : 'dark-theme'
-                    );
-                }}
-            >
-                Mode
-            </Button>
-        </div>
-    );
+    return <Gantt />;
 };
 
 export default App;

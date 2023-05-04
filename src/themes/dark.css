@@ -40,6 +40,7 @@
     --box-shadow-small: 0px 4px 8px #000000;
     --box-shadow-medium: 0px 6px 20px #000000;
     --box-shadow-large: 0px 15px 50px #000000;
+    --box-shadow-header: 0 2px 4px #e0e0e014;
     --color-grass_green: #359970;
     --color-grass_green-hover: #116846;
     --color-grass_green-selected: #0a482e;
