@@ -59,7 +59,7 @@ const task2: Task = {
     subtasks: [child2_task2]
 };
 
-export const TASK_DATAS = [task1, task2];
+export const TASK_DATA = [task1, task2];
 
 const column1: Column = {
     type: 'id',
@@ -81,4 +81,4 @@ const column4: Column = {
     title: 'Start Date'
 };
 
-export const COLUMN_DATAS = [column1, column2, column3, column4];
+export const COLUMN_DATA = [column1, column2, column3, column4];

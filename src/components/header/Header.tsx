@@ -1,6 +1,6 @@
 import type React from 'react';
 import styled from 'styled-components';
-import { COLUMN_DATAS } from 'types/data-example';
+import { COLUMN_DATA } from 'types/data-example';
 import HeaderTable from './header-table/HeaderTable';
 import HeaderTimeline from './header-timeline/HeaderTimeline';
 
@@ -15,7 +15,7 @@ const HeaderContainer = styled.header`
 const Header: React.FC = () => {
     return (
         <HeaderContainer>
-            <HeaderTable columns={COLUMN_DATAS} />
+            <HeaderTable columns={COLUMN_DATA} />
             <HeaderTimeline />
         </HeaderContainer>
     );
