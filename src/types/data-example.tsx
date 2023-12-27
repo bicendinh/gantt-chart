@@ -59,7 +59,87 @@ const task2: Task = {
     subtasks: [child2_task2]
 };
 
-export const TASK_DATA = [task1, task2];
+const child1_task3: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Child 1 - Task 3',
+    startTime: '2017-01-02',
+    duration: 95000,
+    progress: 0.6,
+    isDisabled: false,
+    hideChildren: false
+};
+
+const task3: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Task 3',
+    startTime: '2017-01-02',
+    duration: 900000,
+    progress: 0.2,
+    isDisabled: false,
+    hideChildren: false,
+    subtasks: [child1_task3]
+};
+
+const task4: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Task 4',
+    startTime: '2017-01-02',
+    duration: 800000,
+    progress: 0.7,
+    isDisabled: false,
+    hideChildren: false
+};
+
+const child1_task5: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Child 1 - Task 5',
+    startTime: '2017-01-02',
+    duration: 120000,
+    progress: 0.5,
+    isDisabled: false,
+    hideChildren: false
+};
+
+const task5: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Task 5',
+    startTime: '2017-01-02',
+    duration: 600000,
+    progress: 0.3,
+    isDisabled: false,
+    hideChildren: false,
+    subtasks: [child1_task5]
+};
+
+const child1_task6: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Child 1 - Task 6',
+    startTime: '2017-01-02',
+    duration: 300000,
+    progress: 0.8,
+    isDisabled: false,
+    hideChildren: false
+};
+
+const task6: Task = {
+    id: uuidv4(),
+    type: 'task',
+    name: 'Task 6',
+    startTime: '2017-01-02',
+    duration: 450000,
+    progress: 0.6,
+    isDisabled: false,
+    hideChildren: false,
+    subtasks: [child1_task6]
+};
+
+export const TASK_DATA = [task1, task2, task3, task4, task5, task6];
 
 const column1: Column = {
     type: 'id',
