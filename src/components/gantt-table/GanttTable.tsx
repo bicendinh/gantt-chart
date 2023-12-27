@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { type Task } from 'types';
 import { ROW_HEIGHT } from 'utils/constant';
 import TableRow from './TableRow';
 import { GanttController } from 'utils/GanttController';
@@ -21,7 +20,7 @@ const GanttTableContainer = styled.div`
 `;
 
 const GanttTable: React.FC = () => {
-    const flatTasks: Task[] = new GanttController().useGanttContext();
+    const flatTasks = new GanttController().useGanttContext();
 
     return (
         <GanttTableContainer>
@@ -29,7 +28,6 @@ const GanttTable: React.FC = () => {
                 <TableRow
                     key={task.id}
                     task={task}
-                    flatTasks={flatTasks}
                     style={{
                         height: ROW_HEIGHT,
                         transform: `translate(0px, ${index * ROW_HEIGHT}px)`

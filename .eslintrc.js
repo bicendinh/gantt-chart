@@ -17,9 +17,11 @@ module.exports = {
     plugins: ['react'],
     rules: {
         '@typescript-eslint/semi': 'off',
+        semi: ['error', 'always'],
         indent: 'off',
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/indent': 'off',
-        '@typescript-eslint/member-delimiter-style': 'off'
+        '@typescript-eslint/member-delimiter-style': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off'
     }
-}
+};

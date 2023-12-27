@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { type Task } from 'types';
 import { GanttController } from 'utils/GanttController';
 import GanttSplitter from './GanttSplitter';
+import { GanttElementIds } from 'utils/constant';
 
 const GanttContainer = styled.div`
     position: relative;
@@ -51,7 +52,7 @@ const Gantt: React.FC<GanttProps> = ({ treeTasks }: GanttProps) => {
         <GanttProvider treeTasks={treeTasks}>
             <GanttContainer>
                 <Header />
-                <GanttContent>
+                <GanttContent id={GanttElementIds.GANTT_CONTENT}>
                     <GanttInner>
                         <GanttTable />
                         <GanttSplitter />

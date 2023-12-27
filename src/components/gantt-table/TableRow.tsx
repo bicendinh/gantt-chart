@@ -1,8 +1,8 @@
-import type React from 'react';
-import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { type Task } from 'types';
+import GanttControllerInstance from 'utils/GanttController';
 
+import type React from 'react';
 const TableRowContainer = styled.div`
     min-width: 100%;
     transform-style: flat;
@@ -19,30 +19,14 @@ const TableRowContainer = styled.div`
 
 interface TableRowProps {
     task: Task;
-    flatTasks: Task[];
     style: React.CSSProperties;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ task, style, flatTasks }: TableRowProps) => {
+const TableRow: React.FC<TableRowProps> = ({ task, style }: TableRowProps) => {
     const { name, id } = task;
 
-    const [isDragging, setIsDragging] = useState(false);
-    const dragRef = useRef<HTMLDivElement | null>(null);
-
-    const handleDragStart = (e: React.DragEvent): void => {
-        setIsDragging(true);
-        if (dragRef.current !== null) {
-            e.dataTransfer.setDragImage(dragRef.current, 0, 0);
-        }
-    };
-
-    const handleDragEnd = (): void => {
-        setIsDragging(false);
-    };
-
-    const handleDragOver = (e: React.DragEvent): void => {
-        console.log(e)
-    }
+    const { isDragging, handleDragStart, handleDragEnd, handleDragOver } =
+        GanttControllerInstance.useTaskRow(id);
 
     return (
         <TableRowContainer
@@ -55,7 +39,6 @@ const TableRow: React.FC<TableRowProps> = ({ task, style, flatTasks }: TableRowP
                 ...style,
                 opacity: isDragging ? 0.5 : 1
             }}
-            ref={dragRef}
         >
             {name}
         </TableRowContainer>

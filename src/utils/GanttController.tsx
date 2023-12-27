@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { type Task } from 'types';
 import { getFlatTasks } from 'utils';
+import { GanttElementIds } from './constant';
 
 // Define the context type
 interface GanttContextType {
@@ -24,6 +25,8 @@ interface GanttProviderProps {
 
 export class GanttController {
     private static instance: GanttController | null = null;
+
+    private currentDragTaskId: string | null = null;
 
     // Create the context
     private readonly GanttContext = createContext<GanttContextType | undefined>(
@@ -47,6 +50,68 @@ export class GanttController {
         if (this.setTasksHook !== null) {
             this.setTasksHook(tasks);
         }
+    }
+
+    private getTaskRowEl (taskId: string) {
+        return document.getElementById(taskId);
+    }
+
+    private drawIndicator (e: React.DragEvent) {
+        console.log(this.currentDragTaskId);
+        // Get the GANTT_CONTENT and INDICATOR elements by their ids
+        const ganttContent = document.getElementById(
+            GanttElementIds.GANTT_CONTENT
+        );
+        let indicator = document.getElementById(GanttElementIds.INDICATOR);
+        if (ganttContent === null) return;
+        // Check if both elements exist before appending
+        if (indicator === null) {
+            // Create a new div element for the INDICATOR
+            indicator = document.createElement('div');
+
+            // Set the id of the indicator
+            indicator.id = GanttElementIds.INDICATOR;
+            indicator.className = 'row-drop-indicator';
+
+            // Append the indicator to the GANTT_CONTENT
+            ganttContent.appendChild(indicator);
+        }
+
+        indicator.style.transform = `translateY(${e.clientY}px)`;
+    }
+
+    private removeIndicator () {
+        // Get the GANTT_CONTENT and INDICATOR elements by their ids
+        const ganttContent = document.getElementById(
+            GanttElementIds.GANTT_CONTENT
+        );
+        const indicator = document.getElementById(GanttElementIds.INDICATOR);
+        if (ganttContent === null || indicator === null) return;
+        ganttContent.removeChild(indicator);
+    }
+
+    public useTaskRow (taskId: string) {
+        const [isDragging, setIsDragging] = useState(false);
+
+        const handleDragStart = (e: React.DragEvent): void => {
+            setIsDragging(true);
+            this.currentDragTaskId = taskId;
+            const taskRowEl = this.getTaskRowEl(taskId);
+            if (taskRowEl !== null) {
+                e.dataTransfer.setDragImage(taskRowEl, 0, 0);
+            }
+        };
+
+        const handleDragEnd = (): void => {
+            setIsDragging(false);
+            this.removeIndicator();
+        };
+
+        const handleDragOver = (e: React.DragEvent): void => {
+            this.drawIndicator(e);
+        };
+
+        return { isDragging, handleDragStart, handleDragEnd, handleDragOver };
     }
 
     public GanttProvider: React.FC<GanttProviderProps> = ({
@@ -83,6 +148,6 @@ export class GanttController {
     };
 }
 
-const instance = new GanttController();
+const GanttControllerInstance = new GanttController();
 
-export default instance;
+export default GanttControllerInstance;
