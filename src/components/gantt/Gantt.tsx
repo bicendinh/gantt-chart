@@ -2,6 +2,8 @@ import GanttTable from 'components/gantt-table/GanttTable';
 import GanttTimeline from 'components/gantt-timeline/GanttTimeline';
 import Header from 'components/header/Header';
 import styled from 'styled-components';
+import { type Task } from 'types';
+import { GanttController } from 'utils/GanttController';
 import GanttSplitter from './GanttSplitter';
 
 const GanttContainer = styled.div`
@@ -37,18 +39,27 @@ const GanttInner = styled.div`
     box-sizing: border-box;
 `;
 
-const Gantt: React.FC = () => {
+interface GanttProps {
+    treeTasks: Task[];
+}
+
+const ganttController = new GanttController();
+const GanttProvider = ganttController.GanttProvider;
+
+const Gantt: React.FC<GanttProps> = ({ treeTasks }: GanttProps) => {
     return (
-        <GanttContainer>
-            <Header />
-            <GanttContent>
-                <GanttInner>
-                    <GanttTable />
-                    <GanttSplitter />
-                    <GanttTimeline />
-                </GanttInner>
-            </GanttContent>
-        </GanttContainer>
+        <GanttProvider treeTasks={treeTasks}>
+            <GanttContainer>
+                <Header />
+                <GanttContent>
+                    <GanttInner>
+                        <GanttTable />
+                        <GanttSplitter />
+                        <GanttTimeline />
+                    </GanttInner>
+                </GanttContent>
+            </GanttContainer>
+        </GanttProvider>
     );
 };
 

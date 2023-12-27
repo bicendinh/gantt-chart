@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { type Task } from 'types';
-import { TASK_DATA } from 'types/data-example';
-import { convertToFlatTasks } from 'utils';
 import { ROW_HEIGHT } from 'utils/constant';
 import TableRow from './TableRow';
+import { GanttController } from 'utils/GanttController';
 
 const GanttTableContainer = styled.div`
     flex: 3 1 0%;
@@ -22,8 +21,8 @@ const GanttTableContainer = styled.div`
 `;
 
 const GanttTable: React.FC = () => {
-    const flatTasks: Task[] = [];
-    convertToFlatTasks(TASK_DATA, flatTasks, 1);
+    const flatTasks: Task[] = new GanttController().useGanttContext();
+
     return (
         <GanttTableContainer>
             {flatTasks.map((task, index) => (

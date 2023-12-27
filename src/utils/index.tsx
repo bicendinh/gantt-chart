@@ -1,6 +1,6 @@
 import { type Task } from 'types';
 
-export const convertToFlatTasks = (
+const convertToFlatTasks = (
     treeTasks: Task[],
     flatTasks: Task[],
     level: number
@@ -12,4 +12,10 @@ export const convertToFlatTasks = (
             convertToFlatTasks(task.subtasks, flatTasks, level + 1);
         }
     });
+};
+
+export const getFlatTasks = (treeTasks: Task[]): Task[] => {
+    const flatTasks: Task[] = [];
+    convertToFlatTasks(treeTasks, flatTasks, 1);
+    return flatTasks;
 };
