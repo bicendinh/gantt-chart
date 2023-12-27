@@ -53,31 +53,69 @@ export class GanttController {
     }
 
     private getTaskRowEl (taskId: string) {
-        return document.getElementById(taskId);
+        return document.getElementById(`task-${taskId}`);
+    }
+
+    private getTaskDrag (e: React.DragEvent) {
+        const taskEls = this.tasks.map(({ id }) => ({
+            id,
+            el: this.getTaskRowEl(id)
+        }));
+        const currentClientY = e.clientY;
+        let nearestElement: typeof taskEls[0] | any;
+        let minDistance = Number.MAX_SAFE_INTEGER;
+
+        taskEls.forEach((task) => {
+            const taskRect = task.el?.getBoundingClientRect();
+
+            const taskTranslateY =
+                (taskRect?.top ?? 0) - (task.el?.offsetTop ?? 0);
+
+            if (Math.abs(taskTranslateY - currentClientY) < minDistance) {
+                nearestElement = task;
+                minDistance = Math.abs(taskTranslateY - currentClientY);
+            }
+        });
+
+        return {
+            taskId: nearestElement?.id ?? '',
+            el: nearestElement?.el as HTMLElement
+        };
     }
 
     private drawIndicator (e: React.DragEvent) {
-        console.log(this.currentDragTaskId);
         // Get the GANTT_CONTENT and INDICATOR elements by their ids
         const ganttContent = document.getElementById(
             GanttElementIds.GANTT_CONTENT
         );
         let indicator = document.getElementById(GanttElementIds.INDICATOR);
+
+        // Check if GANTT_CONTENT exist before appending
         if (ganttContent === null) return;
-        // Check if both elements exist before appending
+
         if (indicator === null) {
             // Create a new div element for the INDICATOR
             indicator = document.createElement('div');
 
             // Set the id of the indicator
             indicator.id = GanttElementIds.INDICATOR;
-            indicator.className = 'row-drop-indicator';
 
             // Append the indicator to the GANTT_CONTENT
             ganttContent.appendChild(indicator);
         }
 
-        indicator.style.transform = `translateY(${e.clientY}px)`;
+        const { el, taskId } = this.getTaskDrag(e);
+
+        const taskRect = el.getBoundingClientRect();
+        if (taskId === this.currentDragTaskId) {
+            indicator.className = 'row-drop-indicator drag-invalid';
+        } else {
+            indicator.className = 'row-drop-indicator';
+        }
+
+        indicator.style.transform = `translateY(${
+            (taskRect.top - el.offsetTop) - ganttContent.offsetTop
+        }px)`;
     }
 
     private removeIndicator () {
