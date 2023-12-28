@@ -16,6 +16,7 @@ export type TaskType = 'task' | 'milestone' | 'project';
 export interface Task {
     id: string;
     type: TaskType;
+    parentId?: string;
     name: string;
     startTime: string;
     duration: number; // milisecond

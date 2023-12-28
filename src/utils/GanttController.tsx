@@ -56,6 +56,17 @@ export class GanttController {
         return document.getElementById(`task-${taskId}`);
     }
 
+    private isAncestor (taskId: string, ancestorId: string): boolean {
+        for (const task of this.tasks) {
+            if (task.id !== taskId) continue;
+            if (task.parentId === ancestorId) return true;
+
+            if (task.parentId !== undefined) this.isAncestor(task.parentId, ancestorId);
+        }
+
+        return false;
+    }
+
     private getTaskDrag (e: React.DragEvent) {
         const taskEls = this.tasks.map(({ id }) => ({
             id,
@@ -107,7 +118,7 @@ export class GanttController {
         const { el, taskId } = this.getTaskDrag(e);
 
         const taskRect = el.getBoundingClientRect();
-        if (taskId === this.currentDragTaskId) {
+        if (this.isAncestor(taskId, this.currentDragTaskId ?? '')) {
             indicator.className = 'row-drop-indicator drag-invalid';
         } else {
             indicator.className = 'row-drop-indicator';
